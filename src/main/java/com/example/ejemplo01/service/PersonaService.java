@@ -30,6 +30,10 @@ public class PersonaService {
     public Optional<Persona> getbyName(String nombre) {
         return personaRepository.findByName(nombre);
     }
+    
+    public Optional<Persona> getbyApellidos(String nombre) {
+        return personaRepository.findByApellidos(nombre);
+    }
 
     public void save(Persona persona) {
         personaRepository.save(persona);
@@ -45,6 +49,10 @@ public class PersonaService {
     
     public boolean existsByName(String nombre) {
         return personaRepository.existsByName(nombre);
+    }
+    
+    public boolean existsByApellidos(String nombre) {
+        return personaRepository.existsByApellidos(nombre);
     }
 
     public List<Persona> listar() {

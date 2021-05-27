@@ -8,7 +8,7 @@ import javax.persistence.*;
  */
 
 @Entity
-@Table(name = "persona")
+@Table(name = "personas")
 public class Persona{
     
     @Id
@@ -19,6 +19,14 @@ public class Persona{
     private String name;
     @Column(name = "apellidos")
     private String apellidos;
+
+    public Persona() {
+    }
+    
+    public Persona(String nombre, String apellidos) {
+        this.name = nombre;
+        this.apellidos = apellidos;
+    }
 
     public int getId() {
         return id;
