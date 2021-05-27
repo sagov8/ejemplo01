@@ -1,5 +1,4 @@
 package com.example.ejemplo01.controller;
-
 import com.example.ejemplo01.dto.Mensaje;
 import com.example.ejemplo01.service.PersonaService;
 import com.example.ejemplo01.entity.Persona;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author sagov8
  */
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping({"/personas"})
 public class Controller {
@@ -38,7 +37,7 @@ public class Controller {
     public ResponseEntity<Persona> getById(@PathVariable("id")int id){
         if(!personaService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Persona persona = personaService.getOne(id).get();
+        Persona persona = personaService.getById(id).get();
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
     

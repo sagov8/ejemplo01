@@ -23,7 +23,7 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
-    public Optional<Persona> getOne(int id) {
+    public Optional<Persona> getById(int id) {
         return personaRepository.findById(id);
     }
 
