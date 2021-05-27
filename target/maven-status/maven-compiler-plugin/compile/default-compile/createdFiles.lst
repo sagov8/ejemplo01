@@ -1,1 +1,6 @@
+com/example/ejemplo01/entity/Persona.class
+com/example/ejemplo01/dto/Mensaje.class
+com/example/ejemplo01/repository/PersonaRepositorio.class
+com/example/ejemplo01/service/PersonaService.class
+com/example/ejemplo01/controller/Controller.class
 com/example/ejemplo01/Ejemplo01Application.class

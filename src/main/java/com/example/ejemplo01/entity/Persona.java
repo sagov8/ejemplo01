@@ -1,6 +1,5 @@
 
-package com.example.ejemplo01;
-
+package com.example.ejemplo01.entity;
 import javax.persistence.*;
 
 /**
@@ -10,15 +9,15 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "persona")
-public class Persona {
+public class Persona{
     
     @Id
-    @Column
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column
+    @Column(name = "name")
     private String name;
-    @Column
+    @Column(name = "apellidos")
     private String apellidos;
 
     public int getId() {
