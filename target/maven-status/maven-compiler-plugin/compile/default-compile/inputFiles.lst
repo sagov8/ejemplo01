@@ -1,6 +1,7 @@
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/entity/Persona.java
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/service/PersonaService.java
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/dto/Mensaje.java
+/home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/dto/PersonaDto.java
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/Ejemplo01Application.java
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/repository/PersonaRepositorio.java
 /home/sagov8/NetBeansProjects/ejemplo01/src/main/java/com/example/ejemplo01/controller/Controller.java

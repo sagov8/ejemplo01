@@ -1,5 +1,6 @@
 package com.example.ejemplo01.controller;
 import com.example.ejemplo01.dto.Mensaje;
+import com.example.ejemplo01.dto.PersonaDto;
 import com.example.ejemplo01.service.PersonaService;
 import com.example.ejemplo01.entity.Persona;
 import java.util.List;
@@ -8,9 +9,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -60,6 +63,30 @@ public class Controller {
         Persona person = new Persona(persona.getName(), persona.getApellidos());
         personaService.save(person);
         return new ResponseEntity(new Mensaje("La persona ha sido agregada"), HttpStatus.OK);
-    }   
+    }  
+    
+    @PutMapping("/update/{id}")
+    public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody PersonaDto personaDto){
+        if(!personaService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        if(personaService.existsByName(personaDto.getName()) && personaService.getByName(personaDto.getName()).get().getId() != id)
+            return new ResponseEntity(new Mensaje("ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+        if(StringUtils.isBlank(personaDto.getName()))
+            return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+
+        Persona persona = personaService.getOne(id).get();
+        persona.setName(personaDto.getName());
+        persona.setApellidos(personaDto.getApellidos());
+        personaService.save(persona);
+        return new ResponseEntity(new Mensaje("Se han actualizado los datos"), HttpStatus.OK);
+    }
+    
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Persona> delete(@PathVariable("id")int id){
+        if(!personaService.existsById(id))
+            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+        personaService.delete(id);
+        return new ResponseEntity(new Mensaje("persona eliminada"), HttpStatus.OK);
+    }
             
 }
