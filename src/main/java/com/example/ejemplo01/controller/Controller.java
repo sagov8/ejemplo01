@@ -37,15 +37,15 @@ public class Controller {
     public ResponseEntity<Persona> getById(@PathVariable("id")int id){
         if(!personaService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Persona persona = personaService.getById(id).get();
+        Persona persona = personaService.getOne(id).get();
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
     
-    @GetMapping("/detail/{name}")
+    @GetMapping("/detailname/{name}")
     public ResponseEntity<Persona> getByName(@PathVariable("name")String name){
         if(!personaService.existsByName(name))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Persona persona = personaService.getbyName(name).get();
+        Persona persona = personaService.getByName(name).get();
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
     
@@ -55,7 +55,7 @@ public class Controller {
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(persona.getApellidos()))
             return new ResponseEntity(new Mensaje("el apellido es obligatorio"), HttpStatus.BAD_REQUEST);
-        if(personaService.existsByName(persona.getName()) && personaService.existsByApellidos(persona.getApellidos()))
+        if(personaService.existsByName(persona.getName()))
             return new ResponseEntity(new Mensaje("Nombre ya registrado"), HttpStatus.BAD_REQUEST);
         Persona person = new Persona(persona.getName(), persona.getApellidos());
         personaService.save(person);

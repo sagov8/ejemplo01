@@ -23,16 +23,12 @@ public class PersonaService {
         return personaRepository.findAll();
     }
 
-    public Optional<Persona> getById(int id) {
+    public Optional<Persona> getOne(int id) {
         return personaRepository.findById(id);
     }
 
-    public Optional<Persona> getbyName(String nombre) {
-        return personaRepository.findByName(nombre);
-    }
-    
-    public Optional<Persona> getbyApellidos(String nombre) {
-        return personaRepository.findByApellidos(nombre);
+    public Optional<Persona> getByName(String name) {
+        return personaRepository.findByName(name);
     }
 
     public void save(Persona persona) {
@@ -47,17 +43,8 @@ public class PersonaService {
         return personaRepository.existsById(id);
     }
     
-    public boolean existsByName(String nombre) {
-        return personaRepository.existsByName(nombre);
+    public boolean existsByName(String name) {
+        return personaRepository.existsByName(name);
     }
-    
-    public boolean existsByApellidos(String nombre) {
-        return personaRepository.existsByApellidos(nombre);
-    }
-
-    public List<Persona> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
     
 }
