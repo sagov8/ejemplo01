@@ -22,11 +22,12 @@ public class PersonaService {
     public List<Persona> list() {
         return personaRepository.findAll();
     }
-
-    public Optional<Persona> getOne(int id) {
+    
+    public Persona listarId(int id){
         return personaRepository.findById(id);
+        
     }
-
+    
     public Optional<Persona> getByName(String name) {
         return personaRepository.findByName(name);
     }

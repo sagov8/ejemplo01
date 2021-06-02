@@ -40,7 +40,7 @@ public class Controller {
     public ResponseEntity<Persona> getById(@PathVariable("id")int id){
         if(!personaService.existsById(id))
             return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
-        Persona persona = personaService.getOne(id).get();
+        Persona persona = personaService.listarId(id);
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
     
@@ -74,7 +74,7 @@ public class Controller {
         if(StringUtils.isBlank(personaDto.getName()))
             return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
-        Persona persona = personaService.getOne(id).get();
+        Persona persona = personaService.listarId(id);
         persona.setName(personaDto.getName());
         persona.setApellidos(personaDto.getApellidos());
         personaService.save(persona);

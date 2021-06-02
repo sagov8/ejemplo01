@@ -14,5 +14,6 @@ import org.springframework.stereotype.Repository;
 public interface PersonaRepositorio extends JpaRepository<Persona, Integer>{
     
     Optional<Persona> findByName(String name);
+    Persona findById(int id);
     boolean existsByName(String name);
 }
