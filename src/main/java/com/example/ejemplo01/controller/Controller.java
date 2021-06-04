@@ -33,7 +33,7 @@ public class Controller {
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list() {
         List<Persona> list = personaService.list();
-        return new ResponseEntity(list, HttpStatus.OK);
+        return new ResponseEntity<>(list, HttpStatus.OK);
     }
     
     @GetMapping("/detail/{id}")
@@ -55,30 +55,30 @@ public class Controller {
     @PostMapping("/create")
     public ResponseEntity<?> Create(@RequestBody Persona persona){
         if(StringUtils.isBlank(persona.getName()))
-            return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(persona.getApellidos()))
-            return new ResponseEntity(new Mensaje("el apellido es obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("el apellido es obligatorio"), HttpStatus.BAD_REQUEST);
         if(personaService.existsByName(persona.getName()))
-            return new ResponseEntity(new Mensaje("Nombre ya registrado"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("Nombre ya registrado"), HttpStatus.BAD_REQUEST);
         Persona person = new Persona(persona.getName(), persona.getApellidos());
         personaService.save(person);
-        return new ResponseEntity(new Mensaje("La persona ha sido agregada"), HttpStatus.OK);
+        return new ResponseEntity<>(new Mensaje("La persona ha sido agregada"), HttpStatus.OK);
     }  
     
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody PersonaDto personaDto){
         if(!personaService.existsById(id))
-            return new ResponseEntity(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new Mensaje("no existe"), HttpStatus.NOT_FOUND);
         if(personaService.existsByName(personaDto.getName()) && personaService.getByName(personaDto.getName()).get().getId() != id)
-            return new ResponseEntity(new Mensaje("ese nombre ya existe"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("ese nombre ya existe"), HttpStatus.BAD_REQUEST);
         if(StringUtils.isBlank(personaDto.getName()))
-            return new ResponseEntity(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new Mensaje("el nombre es obligatorio"), HttpStatus.BAD_REQUEST);
 
         Persona persona = personaService.listarId(id);
         persona.setName(personaDto.getName());
         persona.setApellidos(personaDto.getApellidos());
         personaService.save(persona);
-        return new ResponseEntity(new Mensaje("Se han actualizado los datos"), HttpStatus.OK);
+        return new ResponseEntity<>(new Mensaje("Se han actualizado los datos"), HttpStatus.OK);
     }
     
     @DeleteMapping("/delete/{id}")
