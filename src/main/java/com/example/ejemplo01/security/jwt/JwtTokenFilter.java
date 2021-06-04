@@ -1,5 +1,6 @@
 package com.example.ejemplo01.security.jwt;
 
+import com.example.ejemplo01.security.service.UserDetailsServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ import java.io.IOException;
 public class JwtTokenFilter<UserDetailsServiceImpl> extends OncePerRequestFilter {
 
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
-
+ 
     @Autowired
     JwtProvider jwtProvider;
 
     @Autowired
-    UserDetailsServiceImpl userDetailsService;
+    UserDetailsServiceImp userDetailsServiceImp;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {
@@ -30,7 +31,7 @@ public class JwtTokenFilter<UserDetailsServiceImpl> extends OncePerRequestFilter
             String token = getToken(req);
             if(token != null && jwtProvider.validateToken(token)){
                 String nombreUsuario = jwtProvider.getNombreUsuarioFromToken(token);
-                UserDetails userDetails = userDetailsService.loadUserByUsername(nombreUsuario);
+                UserDetails userDetails = userDetailsServiceImp.loadUserByUsername(nombreUsuario);
 
                 UsernamePasswordAuthenticationToken auth =
                         new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
