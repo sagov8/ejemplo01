@@ -5,9 +5,11 @@ import com.example.ejemplo01.service.PersonaService;
 import com.example.ejemplo01.entity.Persona;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,7 +31,7 @@ public class Controller {
 
     @Autowired
     PersonaService personaService;
-    
+
     @GetMapping("/lista")
     public ResponseEntity<List<Persona>> list() {
         List<Persona> list = personaService.list();
@@ -51,7 +53,8 @@ public class Controller {
         Persona persona = personaService.getByName(name).get();
         return new ResponseEntity<>(persona, HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     public ResponseEntity<?> Create(@RequestBody Persona persona){
         if(StringUtils.isBlank(persona.getName()))
@@ -63,8 +66,9 @@ public class Controller {
         Persona person = new Persona(persona.getName(), persona.getApellidos());
         personaService.save(person);
         return new ResponseEntity<>(new Mensaje("La persona ha sido agregada"), HttpStatus.OK);
-    }  
-    
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/update/{id}")
     public ResponseEntity<?> update(@PathVariable("id")int id, @RequestBody PersonaDto personaDto){
         if(!personaService.existsById(id))
@@ -80,7 +84,8 @@ public class Controller {
         personaService.save(persona);
         return new ResponseEntity<>(new Mensaje("Se han actualizado los datos"), HttpStatus.OK);
     }
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<Persona> delete(@PathVariable("id")int id){
         if(!personaService.existsById(id))

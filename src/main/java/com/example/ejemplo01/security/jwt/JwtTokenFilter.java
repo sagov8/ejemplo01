@@ -1,6 +1,6 @@
 package com.example.ejemplo01.security.jwt;
 
-import com.example.ejemplo01.security.service.UserDetailsServiceImp;
+import com.example.ejemplo01.security.service.UserDetailsServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-public class JwtTokenFilter<UserDetailsServiceImpl> extends OncePerRequestFilter {
+public class JwtTokenFilter extends OncePerRequestFilter {
 
     private final static Logger logger = LoggerFactory.getLogger(JwtTokenFilter.class);
  
@@ -23,7 +23,7 @@ public class JwtTokenFilter<UserDetailsServiceImpl> extends OncePerRequestFilter
     JwtProvider jwtProvider;
 
     @Autowired
-    UserDetailsServiceImp userDetailsServiceImp;
+    UserDetailsServiceImpl userDetailsServiceImp;
 
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain filterChain) throws ServletException, IOException {

@@ -2,7 +2,7 @@ package com.example.ejemplo01.security;
 
 import com.example.ejemplo01.security.jwt.JwtEntryPoint;
 import com.example.ejemplo01.security.jwt.JwtTokenFilter;
-import com.example.ejemplo01.security.service.UserDetailsServiceImp;
+import com.example.ejemplo01.security.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,10 +23,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class MainSecurity extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    UserDetailsServiceImp userDetailsServiceImp;
+    UserDetailsServiceImpl userDetailsService;
 
     @Autowired
     JwtEntryPoint jwtEntryPoint;
+
 
     @Bean
     public JwtTokenFilter jwtTokenFilter(){
@@ -49,10 +50,6 @@ public class MainSecurity extends WebSecurityConfigurerAdapter {
         return super.authenticationManager();
     }
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(passwordEncoder());
-    }
 
     //Cuidado cuando se usen Cookies
     @Override
