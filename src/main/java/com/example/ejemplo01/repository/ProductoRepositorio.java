@@ -1,7 +1,7 @@
 
 package com.example.ejemplo01.repository;
 
-import com.example.ejemplo01.entity.Persona;
+import com.example.ejemplo01.entity.Producto;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
  * @author sagov8
  */
 @Repository
-public interface PersonaRepositorio extends JpaRepository<Persona, Integer>{
+public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
     
-    Optional<Persona> findByName(String name);
-    Persona findById(int id);
+    Optional<Producto> findByName(String name);
+    Producto findById(int id);
     boolean existsByName(String name);
 }
