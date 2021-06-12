@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author sagov8
  */
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/producto"})
 public class Controller {
