@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author sagov8
  */
-@CrossOrigin(origins = "postgres://exfwanuijiatlm:dba855497592b1f25803103596522dd7f5f6a303f2dff294c62934de5ca60899@ec2-52-5-247-46.compute-1.amazonaws.com:5432/d8q6blp3ch5l6p")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping({"/producto"})
 public class Controller {
